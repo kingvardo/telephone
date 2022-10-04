@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY RECORDS</title>
+</head>
+
+<body>
+    <h2 align=center>RECORDS</h2>
+    <table border="3" align=center height="200">
+        <tr>
+            <th>SN</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Other Name</th>
+            <th>Telephone</th>
+            <th>Action</th>
+        </tr>
+
+        {% for directory in record %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ directory.first_name }}</td>
+            <td>{{ directory.last_name }}</td>
+            <td>{{ directory.other_name }}</td>
+            <td>{{ directory.tel }}</td>
+            <td>
+                <a href="{% url 'remove' directory.id %}"
+                    onclick="return confirm('ARE YOU SURE?')">REMOVE</a>                -
+                <a href="{% url 'amend' directory.id %}">AMEND</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <h2 align=center><a href="{% url 'insert' %}">INSERT</a></h2>
+
+    {% if messages %}
+
+    {% for message in messages  %}
+    <h4>{{ message }}</h4>
+    {% endfor %}
+
+    {% endif %}
+
+</body>
+
+</html>
